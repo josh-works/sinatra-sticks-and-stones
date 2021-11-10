@@ -5,6 +5,10 @@ class RgybGame
     @user_guesses = []
   end  
   
+  def self.play_game
+    RgybGame.new.play_game
+  end
+  
   def play_game
     puts "Please guess a color combo of 'rgyb': "
     @user_guesses << gets.chomp
@@ -21,4 +25,3 @@ class RgybGame
   end
 end
 
-RgybGame.new.play_game

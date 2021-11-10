@@ -18,3 +18,13 @@ session 0 end:
 
 ---------------
 
+OK, first commit done. 
+
+Playing looks like this: 
+
+![game](/images/playing-game.jpg)
+
+Lets get this playable on localhost via Sinatra.
+
+I wanna be able to do something like `sinatra run app.rb`, visit `localhost:3000`, and have a form/prompt that I can interact with as if it's a command line interface. 
+
