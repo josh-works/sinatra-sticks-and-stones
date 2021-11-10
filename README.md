@@ -13,12 +13,16 @@ Racing to create a playable version of https://gist.github.com/josh-works/6d23e3
 
 timings: 
 
-session 0 start: 3:53 
-session 0 end: 4:30
+session 1 start: 3:53 
+session 1 end: 4:30
+
+session 2 start: 4:42
+session 2 end: 4:54
 
 ---------------
+## Session 1 notes
 
-OK, first commit done. 
+OK, first commit done. (end of session 0)
 
 Playing looks like this: 
 
@@ -35,3 +39,10 @@ I feel rusty w/Sinatra, but am ready to start accepting form data so make the ga
 Reading https://learn.co/lessons/sinatra-forms-params-readme-walkthrough to refresh
 
 Once I have that, I'll get it ready for deploying to Heroku. 
+
+------------------
+
+## Session 2 notes
+
+i'm committing after getting http://localhost:4567/food_form working, after skimming https://learn.co/lessons/sinatra-forms-params-readme-walkthrough
+
