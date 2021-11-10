@@ -14,7 +14,7 @@ Racing to create a playable version of https://gist.github.com/josh-works/6d23e3
 timings: 
 
 session 0 start: 3:53 
-session 0 end: 
+session 0 end: 4:30
 
 ---------------
 
@@ -28,3 +28,10 @@ Lets get this playable on localhost via Sinatra.
 
 I wanna be able to do something like `sinatra run app.rb`, visit `localhost:3000`, and have a form/prompt that I can interact with as if it's a command line interface. 
 
+OK, pausing here. 
+
+I feel rusty w/Sinatra, but am ready to start accepting form data so make the game interactive.
+
+Reading https://learn.co/lessons/sinatra-forms-params-readme-walkthrough to refresh
+
+Once I have that, I'll get it ready for deploying to Heroku. 
