@@ -9,6 +9,10 @@ class RgybGame
     RgybGame.new.play_game
   end
   
+  def welcome_message
+    "welcome to a game"
+  end
+  
   def play_game
     puts "Please guess a color combo of 'rgyb': "
     @user_guesses << gets.chomp

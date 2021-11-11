@@ -1,9 +1,7 @@
 require 'sinatra'
 require './lib/rgyb_game'
 
-get '/' do
-  game = RgybGame.new
-  
+get '/' do  
   erb :index, locals: { game: game }
 end
 
@@ -12,5 +10,10 @@ get '/food_form' do
 end
 
 post '/food' do
-  params.to_s
+  erb :food_form, locals: {params: params,
+                          game: game}
+end
+
+def game
+  @game ||= RgybGame.new
 end

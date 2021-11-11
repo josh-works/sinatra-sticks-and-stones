@@ -15,8 +15,12 @@
   
     <h1>enter a food</h1>
     
-    <p>your last guess, if any:</p>
-    <p><%=  %></p>
+    <p>based on prior submissions:</p>
+    <p>your name: <%= params["name"] %></p>
+    <p>your favorite_food: <%= params["favorite_food"] %></p>
+    <%= params %>
+    <p>game:</p>
+    <%= game.welcome_message %>
     
     <div class="food_form">
       <form method="POST" action="/food">

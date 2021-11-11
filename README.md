@@ -19,6 +19,10 @@ session 1 end: 4:30
 session 2 start: 4:42
 session 2 end: 4:54
 
+session 3 start: 4:58
+session 3 end: 5:07
+
+Total time thus far: 54 min.
 ---------------
 ## Session 1 notes
 
@@ -45,4 +49,6 @@ Once I have that, I'll get it ready for deploying to Heroku.
 ## Session 2 notes
 
 i'm committing after getting http://localhost:4567/food_form working, after skimming https://learn.co/lessons/sinatra-forms-params-readme-walkthrough
+
+If you check out the repo here, do `rerun app.rb`, you'll have something _very basic_
 
