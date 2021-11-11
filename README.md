@@ -59,4 +59,5 @@ passes submitted form data to the next view, but we'll see if the the ruby objec
 
 Now to get to Heroku, I need to consult with my notes:
 
+https://github.com/josh-works/til/blob/main/sinatra/deploy-sinatra-app-to-heroku.md
 
