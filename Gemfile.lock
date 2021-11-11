@@ -38,5 +38,8 @@ DEPENDENCIES
   pry
   sinatra
 
+RUBY VERSION
+   ruby 2.5.8p224
+
 BUNDLED WITH
    2.2.6
