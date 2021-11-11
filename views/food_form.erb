@@ -19,8 +19,9 @@
     <p>your name: <%= params["name"] %></p>
     <p>your favorite_food: <%= params["favorite_food"] %></p>
     <%= params %>
-    <p>game:</p>
-    <%= game.welcome_message %>
+    <p>game object_id:</p>
+    <%= game.object_id %>
+    
     
     <div class="food_form">
       <form method="POST" action="/food">

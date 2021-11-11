@@ -20,9 +20,9 @@ session 2 start: 4:42
 session 2 end: 4:54
 
 session 3 start: 4:58
-session 3 end: 5:07
+session 3 end: 
 
-Total time thus far: 54 min.
+Total time thus far: 45 min.
 ---------------
 ## Session 1 notes
 
@@ -51,4 +51,12 @@ Once I have that, I'll get it ready for deploying to Heroku.
 i'm committing after getting http://localhost:4567/food_form working, after skimming https://learn.co/lessons/sinatra-forms-params-readme-walkthrough
 
 If you check out the repo here, do `rerun app.rb`, you'll have something _very basic_
+
+
+OK, http://localhost:4567/food_form works.
+
+passes submitted form data to the next view, but we'll see if the the ruby object doesn't persist across form submissions, evidenced by the changing object ID.
+
+Now to get to Heroku, I need to consult with my notes:
+
 
