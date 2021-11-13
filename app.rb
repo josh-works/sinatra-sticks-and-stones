@@ -1,17 +1,31 @@
 require 'sinatra'
 require './lib/rgyb_game'
+enable :sessions
 
 get '/' do  
-  erb :index, locals: { game: game }
+  session["m"] = "it me, jjjosh"
+  redirect '/food'
 end
 
-get '/food_form' do
-  erb :food_form
+get '/food' do
+  # session["name"] = "i haz cookie"
+  # # session["pages"] << "/food_form"
+  # erb :food_form
+  "
+   Ruby:    #{RUBY_VERSION}
+   Rack:    #{Rack::VERSION}
+   Sinatra: #{Sinatra::VERSION}
+   #{session['m'].inspect}
+ "
 end
 
 post '/food' do
-  erb :food_form, locals: {params: params,
-                          game: game}
+  session["name"] = "/food"
+  erb :food_form, locals: {
+                            params: params,
+                            game: game,
+                            session: session
+                          }
 end
 
 def game
