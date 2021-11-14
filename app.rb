@@ -1,35 +1,28 @@
 require 'sinatra'
 require './lib/rgyb_game'
-use Rack::Session::Cookie, :key => 'jacked.session',
+use Rack::Session::Cookie, :key => 'rack.session',
                            :path => '/',
                            :expire_after => 2592000, # In seconds
-                           :secret => 'some_secret'
+                           :secret => 'suuuuper_secret'
 
 get '/' do  
-  session["m"] = "it me, focus"
-  redirect '/food'
+  session["visit_count"] ||= 0
+  puts session["visit_count"]
+  session["visit_count"] += 1
+  puts "new session visit count: #{session["visit_count"]}"
+  visit_count = session["visit_count"]
+  erb :index, locals: { visit_count: visit_count }
 end
 
 get '/food' do
   
-  "
-   Ruby:    #{RUBY_VERSION}
-   Rack:    #{Rack::VERSION}
-   Sinatra: #{Sinatra::VERSION}
-   #{session['m'].inspect}
- "
-   # session["name"] = "i haz cookie"
-   # # session["pages"] << "/food_form"
-   # erb :food_form
+  session["message"] = "in a bottle"
+  erb :food_form, locals: { session: session }
 end
 
 post '/food' do
   session["name"] = "/food"
-  erb :food_form, locals: {
-                            params: params,
-                            game: game,
-                            session: session
-                          }
+  redirect '/food'
 end
 
 def game

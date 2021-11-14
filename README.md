@@ -27,7 +27,10 @@ session 4 end: 9:55p
 
 ------------- a few days later ---------
 session 5 start: 4:38p
-session 5 end: 
+session 5 end: 5:38p lol to the minute... school of mines library closing now, gotta pack up.
+
+session 6 start: 9:21p
+session 6 end:
 
 Total time thus far: 60 min, across 2 sessions, rapidly moving towards my goal
 ---------------
@@ -182,3 +185,16 @@ get '/food' do
    # erb :food_form
 end
 ```
+
+
+## session 6
+
+OK, figured out how to grab the session cookie, setting the key. I went a ways down a rabbit hole of figuring out how to decoded and MITM myself by knowing both the key and the secret, but... not a good use of time.
+
+For now, I can stick data in a cookie. Lets practice sticking multiple things in a cookie.
+
+[...]
+
+Er, went simpler, lets just increment a counter in a cookie
+
+And I've got that working. Committing now: 

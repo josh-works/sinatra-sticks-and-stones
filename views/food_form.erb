@@ -9,33 +9,15 @@
 
 </head>
 <body>
-  <header>
-    a food form
-  </header>
   
-    <h1>enter a food</h1>
+<h2>Here's an overview of the cookie data this website is at least _trying_ to place on your laptop:</h2>  
+  <pre>
+  
+  </pre>
     
-    <p>based on prior submissions:</p>
-    <p>your name: <%= params["name"] %></p>
-    <p>your favorite_food: <%= params["favorite_food"] %></p>
-    <%= params %>
-    <p>game object_id:</p>
-    <%= game.object_id %>
-    <p>session: <%= session %></p>
-    msg: <%= msg %>
-    
-    
-    <div class="food_form">
-      <form method="POST" action="/food">
-        
-        <p>your name: <input type="text" name="name"/></p>
-        <p>your favorite food: <input type="text" name="favorite_food"/></p>
-        <input type="submit" />
-
-      </form>
-
-    </div>
-
+    <form class="" action="food" method="post">
+      
+    </form>
     
     <br>
     <footer style="font-size:small;">
