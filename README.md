@@ -91,4 +91,94 @@ What I want to do is something that should be _very_ simple - I want to associat
 
 OK, gonna try to write some code around cookies now.
 
+Ugh. Barely seeing this. I just WIP committed something (to push to heroku) testing https://stackoverflow.com/a/5693760/3210178. 
 
+Feels like I'm kinda setting a cookie, but I thought it would be stored client-side, and... looking at all my cookies on localhost, I cannot find a cookie that I thought I somehow created. 
+
+OK... pushed to heroku, I have the same thing - this "rack:session:cookie", which has a `value` of.... oh, maybe I shoulda looked harder. 
+
+![session](/images/session.jpg)
+
+I expected to see random strings I'd set _in_ the cookie, in the sinatra app, in the cookie data.
+
+```
+BAh7CUkiD3Nlc3Npb25faWQGOgZFVG86HVJhY2s6OlNlc3Npb246OlNlc3Npb25JZAY6D0BwdWJsaWNfaWRJIkVlODhlNDcwN2RmNTg1ZjEyMmJiNTlhZWI3OTk2MzFjZjRhNjhhZWMyOGI5OTUwOWI3OWMwNzNkNzRjMjkyNDJhBjsARkkiCWNzcmYGOwBGSSIxK0p5eVVqNjI5KzE4K3U2R1lLNTFjZGN2SnlNRUo2MGV2KzJ1SlhydGlnST0GOwBGSSINdHJhY2tpbmcGOwBGewZJIhRIVFRQX1VTRVJfQUdFTlQGOwBUSSItMWQyZjQ1OTg0NzUyZTY5ZjliYzIxNjM1ZmRkMzFlYmJmNTY3NWFhOQY7AEZJIgZtBjsAVEkiEml0IG1lLCBqampvc2gGOwBU--29979f47f447a998b09377d25e14f53ad14ae9a5
+```
+
+I guess this is some "encrypted" representation of something that includes the string "jjjosh", but I'm not really seeing it.
+
+Like... I get it. I _thought_ i knew how cookies worked, but where's the file? Where is it being stored? 
+
+OK, back to localhost. I admit I sorta understand the cookie on the server side:
+
+Stick a pry in, call `session`:
+
+```
+> session
+=> {"session_id"=>"80ba123d3cc3dfa74810cfaec75baca361e671399faa7e87b234605018c57c6a", 
+    "csrf"=>"1Eb3aY0WWsNr1HofafmOQTqS+D0iA3Hp04rrOStjZ4c=", 
+    "tracking"=>{
+      "HTTP_USER_AGENT"=>"1d2f45984752e69f9bc21635fdd31ebbf5675aa9"}, 
+      "m"=>"it me, jjjosh"
+    }
+```
+
+With the pry in, you can see something looking like a session-ish, with a key/value pair as you set it. `m`, `it me, jjjosh`. 
+
+that CSRF thing is probably the "salt" or key to a hashing algorithm, which will hash a string representation of the above little blob, and store it as some file in a browser. 
+
+Lets look at another request:
+
+```
+{"session_id"=>"c233edc32d6cf75cfac88feb96cb63c7e1974257906d9198859f62ffbe4a5e11", "csrf"=>"irf+1tyc/9GHK8DcWe6UztaPam88tqGeLXPMp9KqXGk=", "tracking"=>{"HTTP_USER_AGENT"=>"1d2f45984752e69f9bc21635fdd31ebbf5675aa9"}, "m"=>"it me, jjjosh"}
+```
+
+It's a different session ID, and a different CSRF value. 
+
+I keep trying to just view the session in the browser, but if I `puts` session, I get this:
+
+```
+"#<Rack::Session::Abstract::PersistedSecure::SecureSessionHash:0x00007f9bd7178d90>"
+```
+
+I want to see the data. But `to_json` returns the same thing. `show-method` isn't helping me a lot - I cannot see where this method is defined. To the docs: https://www.rubydoc.info/gems/rack/Rack/Session/Abstract/Persisted
+
+Reading that reminded me of:
+
+```
+Rack::Session::Cookie
+```
+
+
+Uuuugh finally got it. Here's the full class. Use firefox/chrome localhost storage inspection tool thingy:
+
+![jacked](/images/jacked.jpg)
+
+ok, finally making it work:
+
+```ruby
+require 'sinatra'
+require './lib/rgyb_game'
+use Rack::Session::Cookie, :key => 'jacked.session',
+                           :path => '/',
+                           :expire_after => 2592000, # In seconds
+                           :secret => 'some_secret'
+
+get '/' do  
+  session["m"] = "it me, focus"
+  redirect '/food'
+end
+
+get '/food' do
+  
+  "
+   Ruby:    #{RUBY_VERSION}
+   Rack:    #{Rack::VERSION}
+   Sinatra: #{Sinatra::VERSION}
+   #{session['m'].inspect}
+ "
+   # session["name"] = "i haz cookie"
+   # # session["pages"] << "/food_form"
+   # erb :food_form
+end
+```

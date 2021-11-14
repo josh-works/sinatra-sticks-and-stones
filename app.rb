@@ -1,22 +1,26 @@
 require 'sinatra'
 require './lib/rgyb_game'
-enable :sessions
+use Rack::Session::Cookie, :key => 'jacked.session',
+                           :path => '/',
+                           :expire_after => 2592000, # In seconds
+                           :secret => 'some_secret'
 
 get '/' do  
-  session["m"] = "it me, jjjosh"
+  session["m"] = "it me, focus"
   redirect '/food'
 end
 
 get '/food' do
-  # session["name"] = "i haz cookie"
-  # # session["pages"] << "/food_form"
-  # erb :food_form
+  
   "
    Ruby:    #{RUBY_VERSION}
    Rack:    #{Rack::VERSION}
    Sinatra: #{Sinatra::VERSION}
    #{session['m'].inspect}
  "
+   # session["name"] = "i haz cookie"
+   # # session["pages"] << "/food_form"
+   # erb :food_form
 end
 
 post '/food' do
