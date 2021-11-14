@@ -13,6 +13,8 @@ Racing to create a playable version of https://gist.github.com/josh-works/6d23e3
 
 timings: 
 
+Day 1: 1 hr
+
 session 1 start: 3:53 
 session 1 end: 4:30
 
@@ -25,14 +27,17 @@ session 3 end: 5:18
 session 4 start: 9:39p
 session 4 end: 9:55p
 
-------------- a few days later ---------
+[a few days pass]
+
+day 2: 1 hr 45min
+
 session 5 start: 4:38p
 session 5 end: 5:38p lol to the minute... school of mines library closing now, gotta pack up.
 
 session 6 start: 9:21p
-session 6 end:
+session 6 end: 10:07p
 
-Total time thus far: 60 min, across 2 sessions, rapidly moving towards my goal
+
 ---------------
 ## Session 1 notes
 
@@ -197,4 +202,26 @@ For now, I can stick data in a cookie. Lets practice sticking multiple things in
 
 Er, went simpler, lets just increment a counter in a cookie
 
-And I've got that working. Committing now: 
+And I've got that working. Committing now: 50fccd3
+
+I now know how to do the game that started this whole thing. 
+
+I'll store in a cookie the random word, and when they submit a guess, I'll store it like:
+
+```ruby
+cookie_data: {word_to_guess: "velociraptor",
+              guesses: ["house", "location"]}
+```
+
+Then, I'll read that data out of the cookie every send/response, send it to a slightly modified function for my game, which will return a message like:
+
+```
+3 correct letters, 1 in the right place.
+
+You've guessed two words so far:
+
+"house",
+"location"
+```
+
+That _could_ be just one more session... 
