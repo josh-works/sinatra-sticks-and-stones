@@ -1,6 +1,6 @@
 ## Overview
 
-Racing to create a playable version of https://gist.github.com/josh-works/6d23e311e959d0c666c5bbc70a57ed3a#sticks-and-stones-v4-
+Racing to create a playable version of https://gist.github.com/josh-works/6d23e311e959d0c666c5bbc70a57ed3a#sticks-and-stones-v4
 
 > We're building your word guessing game!
 > 
@@ -36,6 +36,11 @@ session 5 end: 5:38p lol to the minute... school of mines library closing now, g
 
 session 6 start: 9:21p
 session 6 end: 10:07p
+
+[another day or two passes]
+
+session 7 start: 7:31a
+session 7 end: 8:31a
 
 
 ---------------
@@ -202,6 +207,22 @@ For now, I can stick data in a cookie. Lets practice sticking multiple things in
 
 Er, went simpler, lets just increment a counter in a cookie
 
+```ruby
+require 'sinatra'
+require './lib/rgyb_game'
+use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :expire_after => 2592000, # In seconds
+                           :secret => 'suuuuper_secret'
+
+get '/' do  
+  session["visit_count"] ||= 0
+  session["visit_count"] += 1
+  
+  erb :index, locals: { visit_count: session["visit_count"] }
+end
+```
+
 And I've got that working. Committing now: 50fccd3
 
 I now know how to do the game that started this whole thing. 
@@ -225,3 +246,32 @@ You've guessed two words so far:
 ```
 
 That _could_ be just one more session... 
+
+## Session 7
+
+Now that I've got my head wrapped around cookies, lets finish this up. I'm going to:
+
+- [ ] change up the routes
+- [ ] store data in the cookie
+- [ ] create a form to collect guesses
+
+- https://random-word-api.herokuapp.com/home
+- https://github.com/jnunemaker/httparty
+
+Great success. Here's my updated app methods:
+
+```ruby
+get '/word_guesser' do
+  session["word"] = "dour"
+  erb :word_guesser, locals: { session: session }
+end
+
+post '/word_guesser' do
+  session["guesses"] ||= []
+  session["guesses"] << params["guess"]
+  redirect '/word_guesser'
+end
+```
+
+ok, done. I've got the _basic_ functionality working. It still reveals all to the end user, but i can take form data, write it to a cookie, read data from the cookie to enable "stateful" gameplay. This is cool.
+

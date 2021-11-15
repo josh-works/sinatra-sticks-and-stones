@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,14 +11,22 @@
   <header>
     
   </header>
-    <h1>exploring cookies</h1>
-    <h2>you've visited/refreshed this page about this many times:</h2>  
+    <h1>Lets play a word guessing game!</h1>
+    <h2>Guess a word. Here's the word:</h2>  
       <pre>
-        <%= session["visit_count"] %>
-        <%= session["word"] %>
+        word to guess: <%= game.word %>
+        all guesses: <%= game.guesses %>
+        current_guess: <%= game.current_guess %>
+        number_of_correct_letters for current guess: <%= game.number_of_correct_letters %>
+        letters in correct place for current guess: <%= game.number_of_correct_placements %>
       </pre>
       
-      <a href="/word_guesser">click here to play a word-guessing game</a>
+      <form class="" action="word_guesser" method="post">
+        what's your guess? <input type="text" name="guess"/>
+        <input type="submit" />
+
+      </form>
+      
     <br>
     <footer style="font-size:small;">
       <ul style="">
