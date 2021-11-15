@@ -1,4 +1,4 @@
-require 'HTTParty'
+require 'httparty'
 require 'sinatra'
 require './lib/rgyb_game'
 use Rack::Session::Cookie, :key => 'rack.session',
