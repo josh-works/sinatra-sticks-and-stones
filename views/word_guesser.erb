@@ -11,21 +11,56 @@
   <header>
     
   </header>
-    <h1>Lets play a word guessing game!</h1>
-    <h2>Guess a word. Here's the word:</h2>  
-      <pre>
-        word to guess: <%= game.word %>
-        all guesses: <%= game.guesses %>
-        current_guess: <%= game.current_guess %>
-        number_of_correct_letters for current guess: <%= game.number_of_correct_letters %>
-        letters in correct place for current guess: <%= game.number_of_correct_placements %>
-      </pre>
-      
-      <form class="" action="word_guesser" method="post">
-        what's your guess? <input type="text" name="guess"/>
-        <input type="submit" />
-
+    <h1>Guess the word:</h1>
+    
+        <p>
+          word you're guessing:  <%= game.obscured_word %>
+          </p>
+        <p>
+          it has <%= game.word.chars.count %> characters
+          </p>
+        <p>
+          all your guesses: 
+          
+          </p>
+          <ul>
+            
+          <% game.guesses.each do |g| %>
+            <li><%= g %></li>
+          <% end %>
+        </ul>
+        <p>
+          your most recent guess: <%= game.current_guess %>
+          </p>
+        <p>
+          # of correct letters in the word <%= game.current_guess %>: <%= game.number_of_correct_letters %>
+          </p>
+        <p>
+          # in the right place in the word <%= game.current_guess %>: <%= game.number_of_correct_placements %>
+          </p>
+        
+          <form class="word-guess" action="word_guesser" method="post">
+            what's your guess? <input type="text" name="guess"/>
+            <input type="submit" />
+          </form>
+          
+          <div class="new-word">
+            <p>Want a different word? How many characters?</p>
+      <form class="" action="/new_word" method="post">
+        <input type="radio" id="word_length" name="word_length" value="3">
+        <label for="word_length">a 3 letter word</label><br />
+        <input type="radio" id="word_length" name="word_length" value="4">
+        <label for="word_length">a 4 letter word</label><br />
+        <input type="radio" id="word_length" name="word_length" value="5">
+        <label for="word_length">a 5 letter word</label><br />
+        <input type="radio" id="word_length" name="word_length" value="6">
+        <label for="word_length">a 6 letter word</label><br />
+        <p>Get new word: <input type="submit"></p>
+        
       </form>
+    </div>
+      
+
       
     <br>
     <footer style="font-size:small;">

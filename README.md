@@ -42,6 +42,18 @@ session 6 end: 10:07p
 session 7 start: 7:31a
 session 7 end: 8:31a
 
+[next day]
+
+session 8 start: 9:05p
+session 8 end: 9:47p
+
+[a few days later, lets get this done.]
+
+session 9 start: 2:30p
+session 9 end: 2:45p
+
+it's done enough.
+
 
 ---------------
 ## Session 1 notes
@@ -275,3 +287,27 @@ end
 
 ok, done. I've got the _basic_ functionality working. It still reveals all to the end user, but i can take form data, write it to a cookie, read data from the cookie to enable "stateful" gameplay. This is cool.
 
+## Session 8
+
+I have now tried and discarded a few different word generation approaches. 
+
+I don't want words to be super hard. I want the game to be _actually_ fun, so instead of using a dictionary, I'm using a list of the top few thousand words in the English language.
+
+If you asked me to "pick a random word" it's _very_ likely it would be within the top few thousand most common words.
+
+So, I grabbed a list of top words, saved it in `words.txt` and we're good to go...
+
+Bleh, ready to be done.
+
+
+# Checks for understanding
+
+## How to access params from form input?
+
+`params[what?]`
+
+## Session 9
+
+I am almost done. This has taken too long...
+
+OK, calling it done. it's 2:45p, pushing to heroku, might not touch this for a while.

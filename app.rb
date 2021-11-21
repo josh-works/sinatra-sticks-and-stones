@@ -1,4 +1,5 @@
 require 'httparty'
+require 'random-word'
 require 'sinatra'
 require './lib/word_guesser'
 use Rack::Session::Cookie, :key => 'rack.session',
@@ -11,7 +12,7 @@ get '/' do
 end
 
 get '/word_guesser' do
-  session["word"] ||= RandomWord.word
+  session["word"] ||= get_random_word
   game = WordGuesser.new(session["word"], session["guesses"])
   
   erb :word_guesser, locals: { session: session,
@@ -25,11 +26,25 @@ post '/word_guesser' do
   redirect '/word_guesser'
 end
 
-class RandomWord
-  def self.word
-    response = HTTParty.get('https://random-word-api.herokuapp.com/word')
-    puts response
-    response.body.gsub(/\W/, "")
-  end
+post '/new_word' do
+  new_word = get_random_word(params["word_length"])
+  session["word"] = new_word
+  session["guesses"] = []
+  
+  redirect '/word_guesser'
 end
 
+get '/new_word' do
+  session["word"] = get_random_word
+  redirect '/word_guesser'
+end
+
+def get_random_word(length=4)
+  file = File.open('words.txt', 'r')
+  lines = file.readlines
+  formatted = lines.map(&:chomp)
+  
+  by_length = formatted.group_by(&:length)
+  
+  by_length[length.to_i].sample
+end

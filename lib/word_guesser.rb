@@ -1,8 +1,13 @@
 class WordGuesser
   attr_reader :word, :guesses
   def initialize(word, guesses)
-    @word = word
+    @word = word.chomp
     @guesses = guesses ||= []
+  end
+  
+  def obscured_word
+    p word
+    "*" * word.chars.count
   end
   
   def current_guess
